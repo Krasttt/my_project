@@ -18,11 +18,11 @@ public class Role implements GrantedAuthority {
     public Role() {
     }
 
-    public String getType() {
+    public String getRole() {
         return role;
     }
-    public void setType(String type) {
-        this.role = type;
+    public void setRole(String type) {
+        this.role = role;
     }
 
     public Integer getId() {

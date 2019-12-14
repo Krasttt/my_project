@@ -77,7 +77,9 @@ public class Users implements UserDetails {
     public String getUsername() {
         return username;
     }
-
+    public boolean isAdmin(){
+        return role.getRole().equals("admin");
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;

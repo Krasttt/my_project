@@ -7,6 +7,7 @@ import com.example.my_project.Repositories.LogLevelRepository;
 import com.example.my_project.Repositories.LogsRepository;
 import com.example.my_project.Repositories.RoleRepository;
 import com.example.my_project.Repositories.UsersRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,8 +43,14 @@ public class MainController {
         logsRepository.save(log);
         return "index";
     }
-
-
+    @GetMapping("/hello")
+    public String hello(@AuthenticationPrincipal Users user, Model model) {
+        model.addAttribute("username", user.getUsername());
+        LogLevel level = logLevelRepository.findById(2);
+        Logs log = new Logs(new Date(),"GreetingPage", level);
+        logsRepository.save(log);
+        return "greeting";
+    }
 
 
 }
