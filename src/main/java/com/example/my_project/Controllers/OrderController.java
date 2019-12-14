@@ -30,7 +30,7 @@ public class OrderController {
     }
 
     @GetMapping("/createorder")
-    public String getCreatOrderPage(Model model){
+    public String getCreatOrderPage(Model model) {
         model.addAttribute("models", modelRepository.findAll());
         model.addAttribute("cutters", cutterRepository.findAll());
         model.addAttribute("clothes", clothRepository.findAll());
@@ -41,7 +41,7 @@ public class OrderController {
     public String createOrder(@AuthenticationPrincipal Users user,
                               @RequestParam int model,
                               @RequestParam int cloth,
-                              @RequestParam int cutter){
+                              @RequestParam int cutter) {
 
         Orders order = new Orders();
         order.setUsers(user);

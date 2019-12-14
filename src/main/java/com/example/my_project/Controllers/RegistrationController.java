@@ -22,7 +22,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/registration")
-    public String registrationPage(){
+    public String registrationPage() {
         return "registration";
     }
 
@@ -31,9 +31,9 @@ public class RegistrationController {
                           @RequestParam String password,
                           @RequestParam String confirmPassword,
                           @RequestParam String name,
-                          @RequestParam(defaultValue = "") String surname ){
+                          @RequestParam(defaultValue = "") String surname) {
 
-        if (!password.equals(confirmPassword) || usersRepository.findByUsername(username)!=null){
+        if (!password.equals(confirmPassword) || usersRepository.findByUsername(username) != null) {
             return "redirect:/registration";
         }
 

@@ -18,9 +18,9 @@ public class UserController {
 
     @GetMapping("/profile")
     public String getProfilePage(@AuthenticationPrincipal Users user,
-                                 Model model){
+                                 Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("orders",orderRepository.findByUsersId(user.getId()));
+        model.addAttribute("orders", orderRepository.findByUsersId(user.getId()));
         return "profile";
     }
 }

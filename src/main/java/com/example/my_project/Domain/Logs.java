@@ -15,11 +15,13 @@ public class Logs {
 
     public Logs() {
     }
-    public Logs(Date date, String message, LogLevel level){
+
+    public Logs(Date date, String message, LogLevel level) {
         this.date = date;
         this.message = message;
         this.level = level;
     }
+
     public Integer getId() {
         return id;
     }
