@@ -15,8 +15,48 @@ public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private  String username;
+    private String username;
     private String password;
+    private String name;
+    private String surname;
+    private boolean enabled;
+    @ManyToOne
+    Role role;
+
+    public Users() {
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public boolean isEnabled() {
         return enabled;
@@ -25,11 +65,6 @@ public class Users implements UserDetails {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
-    private boolean enabled;
-
-    @ManyToOne
-    Role role;
 
     public Integer getId() {
         return id;
@@ -69,22 +104,4 @@ public class Users implements UserDetails {
         return roles;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Users() {
-    }
 }

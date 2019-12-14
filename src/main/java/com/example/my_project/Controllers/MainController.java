@@ -6,7 +6,7 @@ import com.example.my_project.Domain.Users;
 import com.example.my_project.Repositories.LogLevelRepository;
 import com.example.my_project.Repositories.LogsRepository;
 import com.example.my_project.Repositories.RoleRepository;
-import com.example.my_project.Repositories.UserAccountRepository;
+import com.example.my_project.Repositories.UsersRepository;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,17 +20,17 @@ public class MainController {
 
     private final LogLevelRepository logLevelRepository;
     private final LogsRepository logsRepository;
-    private final UserAccountRepository userAccountRepository;
+    private final UsersRepository usersRepository;
     private final RoleRepository roleRepository;
 
 
 
     public MainController(LogLevelRepository logLevelRepository, LogsRepository logsRepository,
-                          UserAccountRepository userAccountRepository, RoleRepository roleRepository
+                          UsersRepository usersRepository, RoleRepository roleRepository
                           ) {
         this.logLevelRepository = logLevelRepository;
         this.logsRepository = logsRepository;
-        this.userAccountRepository = userAccountRepository;
+        this.usersRepository = usersRepository;
         this.roleRepository = roleRepository;
 
     }
@@ -43,27 +43,7 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/hello")
-    public String hello(@AuthenticationPrincipal Users user, Model model) {
-        model.addAttribute("username", user.getUsername());
-        LogLevel level = logLevelRepository.findById(2);
-        Logs log = new Logs(new Date(),"GreetingPage", level);
-        logsRepository.save(log);
-        return "greeting";
-    }
 
-    @GetMapping("/registration")
-    public String registration(){
-        return "registration";
-    }
 
-    @PostMapping("/registration")
-    public String addUser(Users userAccount){
-
-        userAccount.setEnabled(true);
-        userAccount.setRole(roleRepository.findByRole("USER"));
-        userAccountRepository.save(userAccount);
-        return "redirect:/login";
-    }
 
 }
