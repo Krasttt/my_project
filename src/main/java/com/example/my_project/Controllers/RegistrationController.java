@@ -3,6 +3,7 @@ package com.example.my_project.Controllers;
 import com.example.my_project.Domain.Users;
 import com.example.my_project.Repositories.RoleRepository;
 import com.example.my_project.Repositories.UsersRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RegistrationController {
     private final UsersRepository usersRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public RegistrationController(UsersRepository usersRepository, RoleRepository roleRepository) {
+    public RegistrationController(UsersRepository usersRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/registration")
@@ -36,11 +39,11 @@ public class RegistrationController {
 
         Users user = new Users();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         user.setSurname(surname);
         user.setName(name);
         user.setEnabled(true);
-        user.setRole(roleRepository.findByRole("USER"));
+        user.setRole(roleRepository.findByRole("user"));
         usersRepository.save(user);
 
         return "redirect:/login";
