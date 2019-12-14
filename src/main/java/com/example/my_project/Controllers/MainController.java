@@ -2,7 +2,6 @@ package com.example.my_project.Controllers;
 
 import com.example.my_project.Domain.LogLevel;
 import com.example.my_project.Domain.Logs;
-import com.example.my_project.Domain.UserServiceImpl;
 import com.example.my_project.Domain.Users;
 import com.example.my_project.Repositories.LogLevelRepository;
 import com.example.my_project.Repositories.LogsRepository;
@@ -23,17 +22,17 @@ public class MainController {
     private final LogsRepository logsRepository;
     private final UserAccountRepository userAccountRepository;
     private final RoleRepository roleRepository;
-    private final UserServiceImpl userServiceImpl;
+
 
 
     public MainController(LogLevelRepository logLevelRepository, LogsRepository logsRepository,
-                          UserAccountRepository userAccountRepository, RoleRepository roleRepository,
-                          UserServiceImpl userServiceImpl) {
+                          UserAccountRepository userAccountRepository, RoleRepository roleRepository
+                          ) {
         this.logLevelRepository = logLevelRepository;
         this.logsRepository = logsRepository;
         this.userAccountRepository = userAccountRepository;
         this.roleRepository = roleRepository;
-        this.userServiceImpl = userServiceImpl;
+
     }
 
     @GetMapping("/")
