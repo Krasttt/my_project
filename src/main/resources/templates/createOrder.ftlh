@@ -1,5 +1,7 @@
+<#include "security.ftlh">
 <#import "common.ftlh"as c >
 <@c.page>
+    <#include "navbar.ftlh">
     <div class="container-fluid">
         <div class="row">
             <div class="col-2"></div>

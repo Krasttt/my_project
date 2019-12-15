@@ -20,7 +20,12 @@ public class UserController {
     public String getProfilePage(@AuthenticationPrincipal Users user,
                                  Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("orders", orderRepository.findByUsersId(user.getId()));
+        if (user.isAdmin()){
+            model.addAttribute("orders", orderRepository.findAll());
+        }
+        else {
+            model.addAttribute("orders", orderRepository.findByUsersId(user.getId()));
+        }
         return "profile";
     }
 }

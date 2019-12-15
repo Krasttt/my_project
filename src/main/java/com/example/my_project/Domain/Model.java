@@ -12,8 +12,17 @@ public class Model {
     private Integer id;
     private String name;
     private double price;
+    private double clothSize;
 
     public Model() {
+    }
+
+    public double getClothSize() {
+        return clothSize;
+    }
+
+    public void setClothSize(double clothSize) {
+        this.clothSize = clothSize;
     }
 
     public Integer getId() {
@@ -40,14 +49,6 @@ public class Model {
         this.price = price;
     }
 
-    public double getCloth_size() {
-        return cloth_size;
-    }
 
-    public void setCloth_size(double cloth_size) {
-        this.cloth_size = cloth_size;
-    }
-
-    private double cloth_size;
 
 }

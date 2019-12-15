@@ -7,26 +7,23 @@
             <div class="col-3"></div>
             <div class="col-6">
                 <div class="card mt-5 ">
-                    <h2 class="card-header text-center ">${user.name} ${user.surname!}
-                        <a href="/createorder" class="btn btn-success mt-2 float-right">Create order</a></h2>
+                    <h2 class="card-header text-center ">Models
+                        <a href="/addModel" class="btn btn-success mt-2 float-right">Add model</a></h2>
                     <div class="card-body">
                         <table class="table table-bordered table-hover">
-
                             <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
-                                <th scope="col" class="col">Model</th>
-                                <th scope="col" class="col">Cloth</th>
-                                <th scope="col" class="col">Cutter</th>
+                                <th scope="col" class="col">Name</th>
+                                <th scope="col" class="col">Price</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <#list orders as order>
+                            <#list models as model>
                                 <tr>
-                                    <th scope="row">${order.id}</th>
-                                    <td>${order.model.name}</td>
-                                    <td>${order.cloth.name}</td>
-                                    <td>${order.cutter.name}</td>
+                                    <th scope="row">${model.id}</th>
+                                    <td>${model.name}</td>
+                                    <td>${model.price}</td>
                                 </tr>
                             </#list>
                             </tbody>
