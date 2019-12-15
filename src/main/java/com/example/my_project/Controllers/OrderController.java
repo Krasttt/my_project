@@ -1,9 +1,9 @@
 package com.example.my_project.Controllers;
 
+import com.example.my_project.Domain.Cloth;
 import com.example.my_project.Domain.Orders;
 import com.example.my_project.Domain.Users;
 import com.example.my_project.Repositories.*;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,12 +44,18 @@ public class OrderController {
                               @RequestParam int cloth,
                               @RequestParam int cutter) {
 
+        com.example.my_project.Domain.Model modelDB = modelRepository.findById(model);
+        Cloth clothDB = clothRepository.findById(cloth);
+        if (modelDB.getClothSize() > clothDB.getSize()){
+            return "redirect:/createorder";
+        }
         Orders order = new Orders();
         order.setUsers(user);
-        order.setModel(modelRepository.findById(model));
-        order.setCloth(clothRepository.findById(cloth));
+        order.setModel(modelDB);
+        order.setCloth(clothDB);
         order.setCutter(cutterRepository.findById(cutter));
         order.setDate(new Date());
+        order.setPrice(clothDB.getPrice() + modelDB.getPrice());
         order.setStatus(statusRepository.findById(1));
 
         orderRepository.save(order);

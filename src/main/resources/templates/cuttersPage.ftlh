@@ -13,17 +13,17 @@
                         <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
                             <tr>
-                                <th>#</th>
-                                <th scope="col" class="col">Name</th>
-                                <th scope="col" class="col">Surname</th>
+                                <th class="text-center">#</th>
+                                <th class="text-center" scope="col" >Name</th>
+                                <th class="text-center" scope="col" >Surname</th>
                             </tr>
                             </thead>
                             <tbody>
                             <#list cutters as cutter>
                                 <tr>
-                                    <th scope="row">${cutter.id}</th>
-                                    <td>${cutter.name}</td>
-                                    <td>${cutter.surname!}</td>
+                                    <th class="text-center" scope="row">${cutter.id}</th>
+                                    <td class="text-center">${cutter.name}</td>
+                                    <td class="text-center">${cutter.surname!}</td>
                                 </tr>
                             </#list>
                             </tbody>

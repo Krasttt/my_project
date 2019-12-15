@@ -15,7 +15,8 @@
 
                                 <div class="form-group row text-right align-items-center"><label class="col-5"> Name : </label>
                                     <div>
-                                        <input class="form-control" type="text" name="name" placeholder="Name..."/>
+                                        <input class="form-control" type="text" name="name" placeholder="Name..."
+                                               minlength="3" maxlength="25" required/>
                                     </div>
                                 </div>
 

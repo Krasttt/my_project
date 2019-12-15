@@ -21,7 +21,7 @@
                                         <div class="col-6">
                                             <select form="order" class="form-control" id="model" name="model">
                                                 <#list models as model>
-                                                    <option value="${model.id}">${model.name}</option>
+                                                    <option value="${model.id}">${model.name} - ${model.price!}$</option>
                                                 </#list>
                                             </select>
                                         </div>
@@ -33,7 +33,7 @@
                                         <div class="col-6">
                                             <select form="order" class="form-control" id="cloth" name="cloth">
                                                 <#list clothes as cloth>
-                                                    <option value="${cloth.id}">${cloth.name}</option>
+                                                    <option value="${cloth.id}">${cloth.name} - ${cloth.price!}$</option>
                                                 </#list>
                                             </select>
                                         </div>
@@ -45,7 +45,7 @@
                                         <div class="col-6">
                                             <select form="order" class="form-control" id="cutter" name="cutter">
                                                 <#list cutters as cutter>
-                                                    <option value="${cutter.id}">${cutter.name}</option>
+                                                    <option value="${cutter.id}">${cutter.name} ${cutter.surname!}</option>
                                                 </#list>
                                             </select>
                                         </div>

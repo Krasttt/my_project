@@ -12,6 +12,15 @@ public class Cloth {
     private Integer id;
     private String name;
     private double price;
+    private double size;
+
+    public double getSize() {
+        return size;
+    }
+
+    public void setSize(double size) {
+        this.size = size;
+    }
 
     public Cloth() {
     }

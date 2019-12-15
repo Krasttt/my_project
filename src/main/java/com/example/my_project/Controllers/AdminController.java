@@ -2,13 +2,13 @@ package com.example.my_project.Controllers;
 
 import com.example.my_project.Domain.Cloth;
 import com.example.my_project.Domain.Cutter;
-import com.example.my_project.Repositories.ClothRepository;
-import com.example.my_project.Repositories.CutterRepository;
-import com.example.my_project.Repositories.ModelRepository;
+import com.example.my_project.Domain.Orders;
+import com.example.my_project.Repositories.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,11 +19,15 @@ public class AdminController {
     private final CutterRepository cutterRepository;
     private final ClothRepository clothRepository;
     private final ModelRepository modelRepository;
+    private final OrderRepository orderRepository;
+    private final StatusRepository statusRepository;
 
-    public AdminController(CutterRepository cutterRepository, ClothRepository clothRepository, ModelRepository modelRepository) {
+    public AdminController(CutterRepository cutterRepository, ClothRepository clothRepository, ModelRepository modelRepository, OrderRepository orderRepository, StatusRepository statusRepository) {
         this.cutterRepository = cutterRepository;
         this.clothRepository = clothRepository;
         this.modelRepository = modelRepository;
+        this.orderRepository = orderRepository;
+        this.statusRepository = statusRepository;
     }
 
     @GetMapping("/cutters")
@@ -64,6 +68,7 @@ public class AdminController {
         Cloth cloth = new Cloth();
         cloth.setName(name);
         cloth.setPrice(price);
+        cloth.setSize(0);
         clothRepository.save(cloth);
         return "redirect:/clothes";
     }
@@ -91,5 +96,19 @@ public class AdminController {
         modelRepository.save(model);
 
         return "redirect:/models";
+    }
+
+    @GetMapping("/removeOrder/{order_id}")
+    public String removeOrder(@PathVariable int order_id){
+        orderRepository.delete(orderRepository.findById(order_id));
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/readyOrder/{order_id}")
+    public String readyOrder(@PathVariable int order_id){
+        Orders order = orderRepository.findById(order_id);
+        order.setStatus(statusRepository.findById(2));
+        orderRepository.save(order);
+        return "redirect:/profile";
     }
 }

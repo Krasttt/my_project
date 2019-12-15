@@ -15,18 +15,19 @@
 
                                 <div class="form-group row text-right align-items-center"><label class="col-5"> Name : </label>
                                     <div>
-                                        <input class="form-control" type="text" name="name" placeholder="Name..."/>
+                                        <input class="form-control" type="text" name="name" placeholder="Name..."
+                                               minlength="3" maxlength="25" required/>
                                     </div>
                                 </div>
 
-                                <div class="form-group row text-right align-items-center"><label class="col-5"> Surname: </label>
+                                <div class="form-group row text-right align-items-center"><label class="col-5"> Price: </label>
                                     <div>
-                                        <input class="form-control" type="number" name="price"
-                                               placeholder="Price..."/>
+                                        <input class="form-control" type="number" min="1" max="10000"name="price"
+                                               placeholder="Price..."  required/>
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="submit" class="btn btn-primary float-right">Add cutter</button>
+                                    <button type="submit" class="btn btn-primary float-right">Add Cloth</button>
                                 </div>
                             </form>
                         </div>

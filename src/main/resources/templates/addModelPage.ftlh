@@ -15,21 +15,24 @@
 
                                 <div class="form-group row text-right align-items-center"><label class="col-5"> Name : </label>
                                     <div>
-                                        <input class="form-control" type="text" name="name" placeholder="Name..."/>
+                                        <input class="form-control" type="text" name="name" placeholder="Name..."
+                                               minlength="3" maxlength="25" required/>
                                     </div>
                                 </div>
 
                                 <div class="form-group row text-right align-items-center"><label class="col-5"> Price: </label>
                                     <div>
                                         <input class="form-control" type="number" name="price"
-                                               placeholder="Price..."/>
+                                               placeholder="Price..."
+                                        min="1" max="10000" required/>
                                     </div>
                                 </div>
 
-                                <div class="form-group row text-right align-items-center"><label class="col-5"> Price: </label>
+                                <div class="form-group row text-right align-items-center"><label class="col-5"> Cloth size: </label>
                                     <div>
                                         <input class="form-control" type="number" name="clothSize"
-                                               placeholder="Cloth size..."/>
+                                               placeholder="Cloth size..."
+                                        min="1" max="100" required/>
                                     </div>
                                 </div>
                                 <div>

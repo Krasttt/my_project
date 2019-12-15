@@ -13,26 +13,29 @@
 
                             <div class="form-group row text-right align-items-center"><label class="col-5"> Login : </label>
                                 <div>
-                                    <input class="form-control" type="text" name="username" placeholder="Login..."/>
+                                    <input class="form-control" type="text" name="username" placeholder="Login..."
+                                    minlength="5" maxlength="25" required/>
                                 </div>
                             </div>
 
                             <div class="form-group row text-right align-items-center"><label class="col-5"> Password: </label>
                                 <div>
                                     <input class="form-control" type="password" name="password"
-                                           placeholder="Password..."/>
+                                           placeholder="Password..." minlength="5" maxlength="25" required/>
                                 </div>
                             </div>
 
                             <div class="form-group row text-right align-items-center"><label class="col-5"> Confirm password: </label>
                                 <div>
-                                    <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm password..."/>
+                                    <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm password..."
+                                    required/>
                                 </div>
                             </div>
 
                             <div class="form-group row text-right align-items-center"><label class="col-5"> Name: </label>
                                 <div>
-                                    <input class="form-control" type="text" name="name" placeholder="Name..."/>
+                                    <input class="form-control" type="text" name="name" placeholder="Name..."
+                                    minlength="3" maxlength="25" required/>
                                 </div>
                             </div>
 

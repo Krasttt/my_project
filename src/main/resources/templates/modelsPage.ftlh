@@ -13,17 +13,19 @@
                         <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
                             <tr>
-                                <th>#</th>
-                                <th scope="col" class="col">Name</th>
-                                <th scope="col" class="col">Price</th>
+                                <th class="text-center">#</th>
+                                <th scope="col" class="text-center">Name</th>
+                                <th scope="col" class="text-center">Price</th>
+                                <th scope="col" class="text-center">Cloth size</th>
                             </tr>
                             </thead>
                             <tbody>
                             <#list models as model>
                                 <tr>
-                                    <th scope="row">${model.id}</th>
-                                    <td>${model.name}</td>
-                                    <td>${model.price}</td>
+                                    <th scope="row" class="text-center">${model.id}</th>
+                                    <td class="text-center">${model.name}</td>
+                                    <td class="text-center">${model.price}$</td>
+                                    <td class="text-center">${model.clothSize}</td>
                                 </tr>
                             </#list>
                             </tbody>

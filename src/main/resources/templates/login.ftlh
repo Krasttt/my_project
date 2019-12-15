@@ -8,20 +8,21 @@
                     <h2 class="card-header text-center ">Welcome!<br>Login</h2>
                     <div class="card-body">
                         <div class=" mt-3 ">
-                            <form th:action="/login" method="post">
+                            <form action="/login" method="post">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
 
                                 <div class="form-group row text-right align-items-center"><label class="col-5"> Login
                                         : </label>
                                     <div>
-                                        <input class="form-control" type="text" name="username" placeholder="Login..."/>
+                                        <input class="form-control" type="text" name="username" placeholder="Login..."
+                                            minlength="5" maxlength="25" required/>
                                     </div>
                                 </div>
                                 <div class="form-group row text-right align-items-center"><label class="col-5">
                                         Password: </label>
                                     <div>
                                         <input class="form-control" type="password" name="password"
-                                               placeholder="Password..."/>
+                                               placeholder="Password..." minlength="5" maxlength="25" required/>
                                     </div>
                                 </div>
                                 <div>
