@@ -1,6 +1,7 @@
 package com.example.my_project.Controllers;
 
 import com.example.my_project.Domain.Cloth;
+import com.example.my_project.Domain.Logs;
 import com.example.my_project.Domain.Orders;
 import com.example.my_project.Domain.Users;
 import com.example.my_project.Repositories.*;
@@ -21,13 +22,17 @@ public class OrderController {
     private final CutterRepository cutterRepository;
     private final StatusRepository statusRepository;
     private final OrderRepository orderRepository;
+    private final LogsRepository logsRepository;
+    private final LogLevelRepository logLevelRepository;
 
-    public OrderController(ModelRepository modelRepository, ClothRepository clothRepository, CutterRepository cutterRepository, StatusRepository statusRepository, OrderRepository orderRepository) {
+    public OrderController(ModelRepository modelRepository, ClothRepository clothRepository, CutterRepository cutterRepository, StatusRepository statusRepository, OrderRepository orderRepository, LogsRepository logsRepository, LogLevelRepository logLevelRepository) {
         this.modelRepository = modelRepository;
         this.clothRepository = clothRepository;
         this.cutterRepository = cutterRepository;
         this.statusRepository = statusRepository;
         this.orderRepository = orderRepository;
+        this.logsRepository = logsRepository;
+        this.logLevelRepository = logLevelRepository;
     }
 
     @GetMapping("/createorder")
@@ -49,6 +54,8 @@ public class OrderController {
         if (modelDB.getClothSize() > clothDB.getSize()){
             return "redirect:/createorder";
         }
+        clothDB.setSize(clothDB.getSize() - modelDB.getClothSize());
+
         Orders order = new Orders();
         order.setUsers(user);
         order.setModel(modelDB);
@@ -57,8 +64,15 @@ public class OrderController {
         order.setDate(new Date());
         order.setPrice(clothDB.getPrice() + modelDB.getPrice());
         order.setStatus(statusRepository.findById(1));
-
+        clothRepository.save(clothDB);
         orderRepository.save(order);
+
+        Logs log = new Logs();
+        log.setDate(new Date());
+        log.setLevel(logLevelRepository.findById(2));
+        log.setMessage(user.getUsername() + " - create new order");
+        logsRepository.save(log);
+
         return "redirect:/profile";
     }
 }

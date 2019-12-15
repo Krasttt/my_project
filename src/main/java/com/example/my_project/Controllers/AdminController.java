@@ -2,6 +2,7 @@ package com.example.my_project.Controllers;
 
 import com.example.my_project.Domain.Cloth;
 import com.example.my_project.Domain.Cutter;
+import com.example.my_project.Domain.Logs;
 import com.example.my_project.Domain.Orders;
 import com.example.my_project.Repositories.*;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
+
 @PreAuthorize("hasAuthority('admin')")
 @Controller
 public class AdminController {
@@ -21,13 +24,17 @@ public class AdminController {
     private final ModelRepository modelRepository;
     private final OrderRepository orderRepository;
     private final StatusRepository statusRepository;
+    private final LogsRepository logsRepository;
+    private final LogLevelRepository logLevelRepository;
 
-    public AdminController(CutterRepository cutterRepository, ClothRepository clothRepository, ModelRepository modelRepository, OrderRepository orderRepository, StatusRepository statusRepository) {
+    public AdminController(CutterRepository cutterRepository, ClothRepository clothRepository, ModelRepository modelRepository, OrderRepository orderRepository, StatusRepository statusRepository, LogsRepository logsRepository, LogLevelRepository logLevelRepository) {
         this.cutterRepository = cutterRepository;
         this.clothRepository = clothRepository;
         this.modelRepository = modelRepository;
         this.orderRepository = orderRepository;
         this.statusRepository = statusRepository;
+        this.logsRepository = logsRepository;
+        this.logLevelRepository = logLevelRepository;
     }
 
     @GetMapping("/cutters")
@@ -48,6 +55,11 @@ public class AdminController {
         cutter.setName(name);
         cutter.setSurname(surname);
         cutterRepository.save(cutter);
+        Logs log = new Logs();
+        log.setDate(new Date());
+        log.setLevel(logLevelRepository.findById(2));
+        log.setMessage("New cutter was add");
+        logsRepository.save(log);
         return "redirect:/cutters";
     }
 
@@ -70,6 +82,11 @@ public class AdminController {
         cloth.setPrice(price);
         cloth.setSize(0);
         clothRepository.save(cloth);
+        Logs log = new Logs();
+        log.setDate(new Date());
+        log.setLevel(logLevelRepository.findById(2));
+        log.setMessage("New cloth was add");
+        logsRepository.save(log);
         return "redirect:/clothes";
     }
 
@@ -94,13 +111,22 @@ public class AdminController {
         model.setPrice(price);
         model.setClothSize(clothSize);
         modelRepository.save(model);
-
+        Logs log = new Logs();
+        log.setDate(new Date());
+        log.setLevel(logLevelRepository.findById(2));
+        log.setMessage("New model was add");
+        logsRepository.save(log);
         return "redirect:/models";
     }
 
     @GetMapping("/removeOrder/{order_id}")
     public String removeOrder(@PathVariable int order_id){
         orderRepository.delete(orderRepository.findById(order_id));
+        Logs log = new Logs();
+        log.setDate(new Date());
+        log.setLevel(logLevelRepository.findById(2));
+        log.setMessage("Order removed - " + order_id);
+        logsRepository.save(log);
         return "redirect:/profile";
     }
 
@@ -110,5 +136,31 @@ public class AdminController {
         order.setStatus(statusRepository.findById(2));
         orderRepository.save(order);
         return "redirect:/profile";
+    }
+
+    @GetMapping("/add10cloth/{cloth_id}")
+    public String add10cloth(@PathVariable int cloth_id){
+        Cloth cloth = clothRepository.findById(cloth_id);
+        cloth.setSize(cloth.getSize()+10);
+        clothRepository.save(cloth);
+        Logs log = new Logs();
+        log.setDate(new Date());
+        log.setLevel(logLevelRepository.findById(2));
+        log.setMessage("Cloth size added");
+        logsRepository.save(log);
+        return "redirect:/clothes";
+    }
+
+    @GetMapping("/add50cloth/{cloth_id}")
+    public String add50cloth(@PathVariable int cloth_id){
+        Cloth cloth = clothRepository.findById(cloth_id);
+        cloth.setSize(cloth.getSize()+50);
+        clothRepository.save(cloth);
+        Logs log = new Logs();
+        log.setDate(new Date());
+        log.setLevel(logLevelRepository.findById(2));
+        log.setMessage("Cloth size added");
+        logsRepository.save(log);
+        return "redirect:/clothes";
     }
 }

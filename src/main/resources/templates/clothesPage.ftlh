@@ -17,6 +17,7 @@
                                 <th scope="col" class="text-center">Name</th>
                                 <th scope="col"  class="text-center">Price</th>
                                 <th scope="col"  class="text-center">Size</th>
+                                <th scope="col" class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -26,6 +27,12 @@
                                     <td class="text-center">${cloth.name}</td>
                                     <td class="text-center">${cloth.price} $</td>
                                     <td class="text-center">${cloth.size} </td>
+                                    <td class="text-center">
+                                        <a href="/add10cloth/${cloth.id}"
+                                           class="btn-sm btn-success mt-1 float-left">Add 10</a>
+                                        <a href="/add50cloth/${cloth.id}"
+                                           class="btn-sm btn-success mt-1 float-right">Add 50</a>
+                                    </td>
                                 </tr>
                             </#list>
                             </tbody>

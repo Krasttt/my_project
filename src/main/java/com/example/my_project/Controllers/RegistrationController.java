@@ -1,6 +1,9 @@
 package com.example.my_project.Controllers;
 
+import com.example.my_project.Domain.Logs;
 import com.example.my_project.Domain.Users;
+import com.example.my_project.Repositories.LogLevelRepository;
+import com.example.my_project.Repositories.LogsRepository;
 import com.example.my_project.Repositories.RoleRepository;
 import com.example.my_project.Repositories.UsersRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,16 +12,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
+
 @Controller
 public class RegistrationController {
     private final UsersRepository usersRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final LogsRepository logsRepository;
+    private final LogLevelRepository logLevelRepository;
 
-    public RegistrationController(UsersRepository usersRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public RegistrationController(UsersRepository usersRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, LogsRepository logsRepository, LogLevelRepository logLevelRepository) {
         this.usersRepository = usersRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.logsRepository = logsRepository;
+        this.logLevelRepository = logLevelRepository;
     }
 
     @GetMapping("/registration")
@@ -45,6 +54,12 @@ public class RegistrationController {
         user.setEnabled(true);
         user.setRole(roleRepository.findByRole("user"));
         usersRepository.save(user);
+
+        Logs log = new Logs();
+        log.setDate(new Date());
+        log.setLevel(logLevelRepository.findById(2));
+        log.setMessage("New user");
+        logsRepository.save(log);
 
         return "redirect:/login";
 
