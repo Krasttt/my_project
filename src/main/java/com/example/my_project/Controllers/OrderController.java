@@ -5,6 +5,7 @@ import com.example.my_project.Domain.Logs;
 import com.example.my_project.Domain.Orders;
 import com.example.my_project.Domain.Users;
 import com.example.my_project.Repositories.*;
+import com.example.my_project.Services.ConnectionPool;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 @Controller
@@ -74,5 +79,25 @@ public class OrderController {
         logsRepository.save(log);
 
         return "redirect:/profile";
+    }
+
+    private String filter(int id){
+        String s = "filter";
+        String filter = "select from \\\"Orders\\\"(id, cutter_id, cloth_id, model_id,user_id,date)\" +\n" +
+                "            \" values (?,?,?,?,?,?) where id=?";
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        try (Connection db = connectionPool.getConnection();
+             PreparedStatement selectAppPreparedStatement = db.prepareStatement("");) {
+
+            ResultSet resultSet = selectAppPreparedStatement.executeQuery();
+
+            ResultSet resultSetNew = selectAppPreparedStatement.executeQuery();
+            if (resultSetNew.next()) {
+                //return resultSetNew.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return s;
     }
 }
